@@ -61,9 +61,8 @@ if (mSpeed==90 || mSpeed==95) {
   mSpeed=0;
 }
 
-if (mSpeed==-90 || mSpeed==-95) {
-  mSpeed=0;
-}
+//    mSpeed=0;
+// }
 
 if (mSpeed==0) {
 analogWrite(speedPin,0);
