@@ -3,9 +3,12 @@ int latchPin=11;
 int clockPin=9;
 int dataPin=12;
 int count=1;
-int dt=125;
-
-byte myNumb=0b00000000; //0b+binary 
+int dt=3000;
+byte binAdd=0b11001000;
+byte binAddOLD;
+int direction=0;
+int rollTrigger=0;
+int isOdd;
 
 void setup() {
   // put your setup code here, to run once:
@@ -20,9 +23,24 @@ void loop() {
   // put your main code here, to run repeatedly:
 
 digitalWrite(latchPin,LOW);
-shiftOut(dataPin,clockPin,LSBFIRST,myNumb);
+shiftOut(dataPin,clockPin,LSBFIRST,binAdd);
 digitalWrite(latchPin,HIGH);
+
+
+if (direction==1)
+{
+binAdd=binAdd*2;
+} else
+{
+  
+  if (binAdd % 2 == 1)
+  {
+    binAdd=binAdd*8;
+  }
+ 
+  binAdd=binAdd/2;
+}
+
 delay(dt);
-myNumb=myNumb+1;
 
 }
