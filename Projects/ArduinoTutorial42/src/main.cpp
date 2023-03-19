@@ -3,7 +3,7 @@ int latchPin=11;
 int clockPin=9;
 int dataPin=12;
 int dt=150;
-byte binAdd=0b10000000;
+byte binAdd=0b10001000;
 int direction=0;
 
 void setup() {

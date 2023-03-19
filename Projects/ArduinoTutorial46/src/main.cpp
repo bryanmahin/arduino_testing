@@ -3,7 +3,7 @@ int latchPin=11;
 int clockPin=9;
 int dataPin=12;
 int dt=500;
-byte binAdd=0b10000000;
+byte binAdd=0b11000011;
 int direction=0;
 
 void setup() {
@@ -26,7 +26,9 @@ Serial.println(binAdd);
 digitalWrite(latchPin,LOW);
 shiftOut(dataPin,clockPin,LSBFIRST,binAdd);
 digitalWrite(latchPin,HIGH);
-binAdd=~binAdd;  
+// binAdd=~binAdd;  
+binAdd=255-binAdd;  
+
 
 delay(dt);
 
