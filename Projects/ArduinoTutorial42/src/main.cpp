@@ -2,13 +2,9 @@
 int latchPin=11;
 int clockPin=9;
 int dataPin=12;
-int count=1;
-int dt=3000;
-byte binAdd=0b11001000;
-byte binAddOLD;
+int dt=300;
+byte binAdd=0b10001000;
 int direction=0;
-int rollTrigger=0;
-int isOdd;
 
 void setup() {
   // put your setup code here, to run once:
@@ -22,25 +18,22 @@ pinMode(clockPin,OUTPUT);
 void loop() {
   // put your main code here, to run repeatedly:
 
+if (direction==1)
+{
+// Serial.println(binAdd);
 digitalWrite(latchPin,LOW);
 shiftOut(dataPin,clockPin,LSBFIRST,binAdd);
 digitalWrite(latchPin,HIGH);
-
-
-if (direction==1)
-{
-binAdd=binAdd*2;
-} else
-{
-  
-  if (binAdd % 2 == 1)
-  {
-    binAdd=binAdd*8;
-  }
+binAdd=binAdd*128+binAdd/2;  
  
-  binAdd=binAdd/2;
+} 
+if (direction==0) 
+{
+// Serial.println(binAdd);
+digitalWrite(latchPin,LOW);
+shiftOut(dataPin,clockPin,LSBFIRST,binAdd);
+digitalWrite(latchPin,HIGH);
+binAdd=binAdd/128+binAdd*2;  
 }
-
-delay(dt);
-
+ delay(dt); 
 }
