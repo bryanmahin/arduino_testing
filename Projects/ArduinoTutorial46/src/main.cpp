@@ -1,25 +1,33 @@
 #include <Arduino.h>
-int ledPin=13;
-int dt=1000;
-// byte bNum=B00000110;
-// byte flippedbNum;   
+int latchPin=11;
+int clockPin=9;
+int dataPin=12;
+int dt=500;
+byte binAdd=0b10000000;
+int direction=0;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
-  pinMode(ledPin,OUTPUT);
+Serial.begin(9600);
+pinMode(latchPin,OUTPUT);
+pinMode(dataPin,OUTPUT);
+pinMode(clockPin,OUTPUT);
+
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+// digitalWrite(latchPin,LOW);  //TEST 
+// shiftOut(dataPin,clockPin,LSBFIRST,binAdd);
+// digitalWrite(latchPin,HIGH);
 
 
-digitalWrite(ledPin,HIGH);
+Serial.println(binAdd);
+digitalWrite(latchPin,LOW);
+shiftOut(dataPin,clockPin,LSBFIRST,binAdd);
+digitalWrite(latchPin,HIGH);
+binAdd=~binAdd;  
+
 delay(dt);
-digitalWrite(ledPin,LOW);
-delay(dt);
-
-// flippedbNum = ~bNum;
-Serial.println("test");
 
 }
