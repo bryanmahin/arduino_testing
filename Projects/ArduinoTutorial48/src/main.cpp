@@ -11,13 +11,13 @@ int d7=12;
 int j;
 LiquidCrystal lcd(rs,en,d4,d5,d6,d7);
 
-int firstNum=1;
-int secondNum=1;
+float firstNum=1;
+float secondNum=1;
 String op;
 float sum;
 
 int dt=500;
-int finaldt=5000;
+int finaldt=3000;
 
 void setup() {
   // put your setup code here, to run once:
@@ -31,7 +31,7 @@ void loop() {
 lcd.setCursor(0,0);
 lcd.print("Enter First #");
 while (Serial.available()==0) {}
-firstNum = Serial.parseInt();
+firstNum = Serial.parseFloat();
 Serial.print(firstNum);
 lcd.setCursor(0,1);
 lcd.print(firstNum);
@@ -48,47 +48,64 @@ lcd.print(op);
 delay(dt);
 lcd.clear();  
   
+ 
+  
+if (op == "+" || op == "-" || op == "*" || op == "/" )
+{
+
+  lcd.setCursor(0,0);
+  lcd.print("Enter Second #");
+  while (Serial.available()==0) {}
+  secondNum = Serial.parseFloat();
+  Serial.print(secondNum);
+  lcd.setCursor(0,1);
+  lcd.print(secondNum);
+  delay(dt);
+  lcd.clear(); 
+
+  if (op == "+")
+  {
+  sum=firstNum+secondNum;
+  }
+    
+  if (op == "-")
+  {
+  sum=firstNum-secondNum;
+  }
+    
+  if (op == "/")
+  {
+  sum=firstNum/secondNum;
+  }
+    
+  if (op == "*")
+  {
+  sum=firstNum*secondNum;
+  }
+
+  lcd.setCursor(0,0);
+  lcd.print(firstNum);
+  lcd.print(op);
+  lcd.print(secondNum);
+  lcd.print("=");  
+  lcd.setCursor(0,1);
+  lcd.print(sum); 
+
+    
+
+    
+  delay(finaldt);
+  lcd.clear();
+
+} else {
+
 lcd.setCursor(0,0);
-lcd.print("Enter Second #");
-while (Serial.available()==0) {}
-secondNum = Serial.parseInt();
-Serial.print(secondNum);
-lcd.setCursor(0,1);
-lcd.print(secondNum);
+lcd.print("Op Not Valid!");
 delay(dt);
-lcd.clear();  
-  
+lcd.clear(); 
 
-if (op == "+")
-{
-sum=firstNum+secondNum;
-}
-  
-if (op == "-")
-{
-sum=firstNum-secondNum;
-}
-  
-if (op == "/")
-{
-sum=firstNum/secondNum;
-}
-  
-if (op == "*")
-{
-sum=firstNum*secondNum;
 }
 
-lcd.setCursor(0,0);
-lcd.print("Answer");  
-Serial.print(sum);
-lcd.setCursor(0,1);
-lcd.print(sum); 
 
-  
-
-   
-delay(finaldt);
-lcd.clear();
 
 }
