@@ -8,8 +8,8 @@ int d4=9;
 int d5=10;
 int d6=11;
 int d7=12;
-int j;
 LiquidCrystal lcd(rs,en,d4,d5,d6,d7);
+int j;
 
 float radius=1;
 float pi=3.14159;
