@@ -3,6 +3,18 @@
 		{
 			"name": "Projects",
 			"path": "."
+		},
+		{
+			"name": "SprinterInterface",
+			"path": "SprinterInterface"
+		},
+		{
+			"name": "CANBusTest",
+			"path": "CANBusTest"
+		},
+		{
+			"name": "CANBusTest2",
+			"path": "CANBusTest2"
 		}
 	],
 	"settings": {}
